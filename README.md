@@ -2,7 +2,7 @@
 JavaScript reader of EDF+/BDF+ files
 
 **Usage**
-```html
+```js
 var bytes = UInt8Array(); //Acquired some how (e.g. from input-file or server-based)
 
 var edf = new EDF(bytes);
