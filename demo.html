@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" value="Dmitry Konyshev, d.konyshev@neurobotics.ru">	
+		<title>Neurobotics jsEDF online viewer</title>
+		<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkVDNjY0QkVGMDNCODExRUJCMkQxREEwMjNGNzIzMTZFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkVDNjY0QkYwMDNCODExRUJCMkQxREEwMjNGNzIzMTZFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RUM2NjRCRUQwM0I4MTFFQkIyRDFEQTAyM0Y3MjMxNkUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RUM2NjRCRUUwM0I4MTFFQkIyRDFEQTAyM0Y3MjMxNkUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7LflwBAAADiUlEQVR42uxXW0gUYRT+Znb24lKCogZeURCEBYmIFBEVfEhKrK0gggo3wnr0gg8qKdGjCIKILykpuasrQay05EP07AUyJQhB8MV0ydQwU9vdmc4Zd8dcN2VLd3vowM/8t/nP+c/3nTNzBDx8AXg2DBDFFkCxAUgHBAGqKLsPBIZ/P+aJTzQegCw/QcqpLYkmTNQGae817PgC+49NYehYIBvSYDQ00SCf2k2JlDWpyhUZZVUW2M6mQtKJJ2KAzy/DMbuE168+8tJl0v1Iwo73Ad+87KoFb2sKcNJy90IGrtAFXc73wLbvnoiv22cgCqg5n4FoyX3WJZGXN7aTxSDmIqIngrIHi7jbUSBH0QBZ44d6cWUfXaIrSlQ9H1bEIBZCTNQLsfeAFMoBv9+Prq4uuN1uSloKBYgAg8GA0tJSNDY2wuVyqevr6+vqXl7PyclBQ0MDCgsLtYP7+/sxPDwMn89HWV6EXq9HeXk5amtr93FACrVobGwMdXV16OjoQHJyciCDK8jKylL7k5OTGB8fh9PphE6nw9bWFux2O4qKijA9PY38/HzMzMyguroazc3NyMvL087Izs4O54H9HFhcXERiYiLq6+vDuoyVZmZmoqKiQpurqqrC1NQUOjs70dfXB4/Ho+5rbW2F0WiMjAP8oiAcTklZPpg12KCJiQntDHb7H3GA8V5dXUVBQYFmiCRJGBoaQnp6+m8PYriYF8H9Xq8XVqtV8wDPdXd3IyUl5XAOMGnMZjPa29vVm+xmagFJSUlHB1XAYMabPcDQxMfHa17hc4/kALvXZDKhpKQkonBaWlpCQkKCFkms0GazRc4BfjkcxqE8CZXR0VEUFxfvOZe8sLm5GTkHOKbX1tbUEArixYfl5uaisrJSNXBubg69vb0qrhyGHO8rKytq+AZh5HbURcJygJPF4OCgmogWFha0JBIXF6euMzTz8/NwOBwq0dgIi8WCnp4e1UgWzhlsTPCdw5Px9QGF/opgf3wRt86lRSX9umY9uNLippCT/omv4f//gZj/DygxUi/8CkF0sdjN2EoAgnjTZ/gVPHu3GDUDnrMuHyWp08YvEkz6pzBKTVwuccVyh0ozvXgy/vBSZhyZXYbz5QeQTqpK9f0CVcdmqo5HIIiXsPODfCIeZzF6cEz1IUwG6spvqDq2cir+Tu0G7Wkji25TP/Vky3PdMnUctNRGz28/BRgAg5JcyEt6pdYAAAAASUVORK5CYII=">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="edf.js?r=<?=rand()?>"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+		<link rel>
+		<style>
+			* { font-family: 'Roboto Mono', monospace; box-sizing: border-box; }
+			html, body { margin: 0; padding: 0; background: #FFF; overflow: hidden; }
+			
+			body {
+			
+			height: 100%; 
+			min-height: 100vh;			
+			}
+		</style>
+	</head>
+	<body >
+		<div style="height: 80px; background: #CCC; padding: 10px;">
+		<input type="file" name="file" id="file" onchange="openFile(this.files)">
+		
+		<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTYuNDUsMTcuNDVMMSwxMkw2LjQ1LDYuNTVMNy44Niw3Ljk2TDQuODMsMTFIMTkuMTdMMTYuMTQsNy45NkwxNy41NSw2LjU1TDIzLDEyTDE3LjU1LDE3LjQ1TDE2LjE0LDE2LjA0TDE5LjE3LDEzSDQuODNMNy44NiwxNi4wNEw2LjQ1LDE3LjQ1WiIgLz48L3N2Zz4=" width="16" height="16" style="vertical-align: middle;">
+		
+		<select id="select-scaleY">
+			<option value="0.001">0.001 μV/px</option>
+			<option value="0.01">0.01 μV/px</option>
+			<option value="0.1" selected>0.1 μV/px</option>
+			<option value="1">1 μV/px</option>
+			<option value="10">10 μV/px</option>
+			<option value="100">100 μV/px</option>
+		</select>
+		
+		<span style="display: inline-block; width: 20px;"></span>
+				
+		<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTYuNDUsMTcuNDVMMSwxMkw2LjQ1LDYuNTVMNy44Niw3Ljk2TDQuODMsMTFIMTkuMTdMMTYuMTQsNy45NkwxNy41NSw2LjU1TDIzLDEyTDE3LjU1LDE3LjQ1TDE2LjE0LDE2LjA0TDE5LjE3LDEzSDQuODNMNy44NiwxNi4wNEw2LjQ1LDE3LjQ1WiIgLz48L3N2Zz4=" width="16" height="16" style="vertical-align: middle">
+		
+		<select id="select-visualSeconds">
+			<option value="1">1 s/screen</option>
+			<option value="10">5 s/screen</option>
+			<option value="10" selected>10 s/screen</option>
+			<option value="15">15 s/screen</option>
+			<option value="30">30 s/screen</option>
+			<option value="60">60 s/screen</option>
+			<option value="100">100 s/screen</option>
+		</select>
+		<br/>
+		
+		<input id="scroll" type="range" min="0" max="0" value="0" style="width: calc(100% - 20px); margin-top: 10px;">
+		</div>
+		<div style="position: absolute; top: 80px; height: calc(100vh - 80px); width: 100%; " id="canvasSignalholder">
+			<canvas id="canvasSignal" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+			<canvas id="canvasSignalLine" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+			<canvas id="canvasSignalNow" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
+			<script>
+				
+				var signalPoints = [];
+				var samplingRate = 120;
+				var visualSeconds = 10;
+				var scaleY = 0.1;
+				var offsetSeconds = 0;
+				var maxSeconds = 0;
+				var channelsCount = 0;
+				var fontFamily = 'Roboto Mono';
+				var fontSize = 12;
+				
+				function pad(n, width, z) {
+					z = z || '0';
+					n = n + '';
+					return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+				}
+				
+				function timeToText(seconds)
+				{
+					var s = seconds%60;
+					var m = Math.floor(seconds/60)%60;
+					var h = Math.floor((seconds/60)/60);
+					
+					return (h>0?(pad(h,2)+":"):"")+pad(m,2) +":"+pad(s,2);
+				}
+				
+				function updateScrollBar()
+				{
+					var secs = visualSeconds;
+					var max = maxSeconds;
+					var maxScroll = Math.ceil(max - secs);
+					$("#scroll").attr("max", maxScroll);
+					$("#scroll").val(offsetSeconds);
+				}
+				
+				function resizeCanvasEEG()
+				{
+					var parent = $("#canvasSignalholder");				
+					
+					var canvas = document.getElementById('canvasSignal');
+					canvas.width = parent.width();
+					canvas.height = parent.height();
+					canvas.style.width = parent.width();
+					canvas.style.height = parent.height();
+					
+					canvas = document.getElementById('canvasSignalLine');
+					canvas.width = parent.width();
+					canvas.height = parent.height();
+					canvas.style.width = parent.width();
+					canvas.style.height = parent.height();
+					
+					canvas = document.getElementById('canvasSignalNow');
+					canvas.width = parent.width();
+					canvas.height = parent.height();
+					canvas.style.width = parent.width();
+					canvas.style.height = parent.height();
+					
+					drawEEGGrid();
+				}			
+				
+				
+				function drawEEGGrid()
+				{					
+					var canvas = document.getElementById('canvasSignal');
+					var w = canvas.width;
+					var h = canvas.height;
+					
+					var context = canvas.getContext('2d');
+					context.width = w;
+					context.height = h;
+					context.fillStyle = "#FFF";
+					context.fillRect(0, 0, w, h);
+					context.translate(0.5, 0.5);
+					var offset = 10;
+					
+					var vh = h - offset*2;
+					var vw = w - offset*2;
+					
+					
+					var pixelsPerSecond = vw/visualSeconds;
+					
+					context.strokeWidth = 1;
+					
+					for (var i = 1; i<=visualSeconds; i++)
+					{
+						context.lineWidth = 1;
+						context.strokeStyle = '#DDD';
+						context.beginPath();
+						context.moveTo(offset+pixelsPerSecond*(i-0.5), offset);
+						context.lineTo(offset+pixelsPerSecond*(i-0.5), offset+vh);
+						context.stroke();
+						
+						context.lineWidth = 1;
+						context.strokeStyle = '#999';
+						context.beginPath();
+						context.moveTo(offset+pixelsPerSecond*i, offset);
+						context.lineTo(offset+pixelsPerSecond*i, offset+vh);
+						context.stroke();
+					}
+					
+					context.strokeStyle = '#999';
+					context.lineWidth = 1;
+					
+					context.strokeRect(offset, offset, vw, vh);				
+				}
+				
+				function redrawSignals()
+				{
+					var canvas = document.getElementById('canvasSignalLine');
+					var context = canvas.getContext('2d');
+					
+					var w = canvas.width;
+					var h = canvas.height;
+					
+					context.width = w;
+					context.height = h;
+					context.clearRect(0, 0, w, h);				
+					
+					var offset = 10;
+					
+					var vh = h - offset*2;
+					var vw = w - offset*2;
+					
+					var pixelsPerSecond = vw/visualSeconds;
+					var pixelsPerSample = 1.0*pixelsPerSecond/samplingRate;
+					
+					context.font = fontSize+"px '" + fontFamily+"'";
+					context.fillStyle = "#333";
+					context.textAlign = "left";
+					for (var i =0; i<visualSeconds; i++)
+					{
+						context.fillText(timeToText(offsetSeconds+i), offset + 1 + i*pixelsPerSecond, offset + vh -2);
+					}
+					
+					var channelCount = signalPoints.length;
+					var channelOffset = vh/(channelCount);
+					for (var i =0; i<channelCount; i++)
+					{				
+						var d = signalPoints[i];
+						//console.log(d);
+						var x = offset;
+						var y = offset+(i+0.5)*(channelOffset);
+						
+						context.lineWidth = 1;
+						context.strokeStyle = '#999';
+						context.beginPath();
+						context.moveTo(x, y);
+						context.lineTo(x+vw, y);
+						context.stroke();
+						
+						context.lineWidth = 2;
+						context.strokeStyle = '#159';
+						context.beginPath();
+						context.moveTo(x, y);
+						
+						for (var j = 0; j<d.length; j++)
+						{
+							context.lineTo(x, y - d[j]*scaleY);						
+							//console.log(signalPoints[i]);						
+							x+=pixelsPerSample;								
+						}
+						
+						context.stroke();
+					}							
+				}
+				
+				function setScaleY(scale)
+				{
+					scaleY = scale;
+					redrawSignals();
+				}
+				
+				function setVisualSeconds(seconds)
+				{
+					visualSeconds = seconds;
+					drawEEGGrid();
+					
+					updateData();
+				}
+				
+				function setOffsetSeconds(offset)
+				{
+					offsetSeconds = offset;
+					updateData();
+				}
+				
+				function updateData()
+				{
+					if (edf)
+					{
+						signalPoints = edf.read(offsetSeconds, visualSeconds);
+					}					
+					redrawSignals();
+				}
+				
+				var mouseX = 0;
+				var mouseY = 0;
+				
+				
+				function limitToBounds(value, min, max)
+				{
+					if (value < min) return min;
+					if (value > max) return max;
+				}	
+				
+				$(function() 
+				{ 
+					$(window).resize(function() { resizeCanvasEEG(); redrawSignals(); });
+					resizeCanvasEEG();
+					
+					$("body").mousemove(function(e) 
+					{
+						mouseX = e.pageX;
+						mouseY = e.pageY;
+						
+						
+					});	
+				})
+			</script>
+		</div>
+		
+		<script>
+			
+			
+			var edf = null;
+			
+			
+			function base64ToBufferAsync(base64) 
+			{
+				var dataUrl = "data:application/octet-binary;base64," + base64;
+				
+				fetch(dataUrl)
+				.then(res => res.arrayBuffer())
+				.then(buffer => 
+				{	
+					var buf = new Uint8Array(buffer);
+					
+					edf = new EDF(buf);
+					offsetSeconds = 0;
+					maxSeconds = edf.duration;
+					updateScrollBar();
+					//console.log(edf);
+					samplingRate = edf.sampling_rate;
+					//signalPoints = edf.read(0, visualSeconds);					
+					updateData();					
+					//console.log("base64 to buffer: " + buf);
+				})
+			}
+			
+			// buffer to base64
+			function bufferToBase64Async( buffer ) 
+			{
+				var blob = new Blob([buffer], {type:'application/octet-binary'});    
+				console.log("buffer to blob:" + blob)
+				
+				var fileReader = new FileReader();
+				fileReader.onload = function() {
+					var dataUrl = fileReader.result;
+					console.log("blob to dataUrl: " + dataUrl);
+					
+					var base64 = dataUrl.substr(dataUrl.indexOf(',')+1)      
+					console.log("dataUrl to base64: " + base64);
+				};
+				fileReader.readAsDataURL(blob);
+			}
+			
+			function openFile(files)
+			{
+				console.log(files);
+				var reader = new FileReader();
+				reader.onload = function(e) 
+				{
+					// The file's text will be printed here
+					var base64 = e.target.result;
+					base64 = base64.replace("data:application/octet-stream;base64,", "");
+					
+					base64ToBufferAsync(base64);
+					
+				};
+				
+				reader.readAsDataURL(files[0]);
+			}
+			
+			$(function() { 
+				$("#select-visualSeconds").change(function()
+				{
+					setVisualSeconds(parseFloat($(this).val()));
+				});
+				
+				$("#select-scaleY").change(function()
+				{
+					setScaleY(parseFloat($(this).val()));
+				});
+				
+				$("#scroll").on('input', function()
+				{
+					setOffsetSeconds(parseFloat($(this).val()));
+				});
+			});
+		</script>
+	</body>
+</html>
