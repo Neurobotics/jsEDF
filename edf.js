@@ -152,7 +152,7 @@ class EDF
 						var b1 = buf[pos]; pos++;
 						var b2 = buf[pos]; pos++;						
 											
-						var val = ((b2 << 24) + (b1 << 16)) >> 16;
+						var val = ((b2 << 24) | (b1 << 16)) >> 16;
 						this.channels[i].data.push(val*koef);
 					}
 					else if (this.bytes_per_sample == 3)
@@ -161,7 +161,7 @@ class EDF
 						var b2 = buf[pos]; pos++;						
 						var b3 = buf[pos]; pos++;						
 											
-						var val = ((b2 << 24) + (b1 << 16)) >> 16;
+						var val = ((b3 << 24) | (b2 << 16) | (b1 << 8)) >> 8;
 						this.channels[i].data.push(val*koef);
 					}
 				}
