@@ -8,11 +8,6 @@ function arrayToAscii(array, start, length)
 	return str.trim();
 }
 
-function flipBits(n) 
-{
-  return parseInt(n.toString(2).split('').map(bit => 1 - bit).join(''),2)
-}
-
 class EDF
 {
 	constructor(uint8array)
@@ -157,12 +152,7 @@ class EDF
 						var b1 = buf[pos]; pos++;
 						var b2 = buf[pos]; pos++;						
 											
-						var val = (b2 << 8) + b1;
-			
-						if (b2 >> 7 == 1)
-						{				
-							val = -flipBits(val)-1;	
-						}
+						var val = ((b2 << 24) + (b1 << 16)) >> 16;
 						this.channels[i].data.push(val*koef);
 					}
 					else if (this.bytes_per_sample == 3)
@@ -171,12 +161,7 @@ class EDF
 						var b2 = buf[pos]; pos++;						
 						var b3 = buf[pos]; pos++;						
 											
-						var val = (b3 << 16) + (b2 << 8) + b1;
-			
-						if (b3 >> 7 == 1)
-						{				
-							val = -flipBits(val)-1;	
-						}
+						var val = ((b2 << 24) + (b1 << 16)) >> 16;
 						this.channels[i].data.push(val*koef);
 					}
 				}
